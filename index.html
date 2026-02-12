@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Four Fountains · De-Stress Spa | Pure Wellness</title>
+  <!-- Tailwind latest via CDN + Inter font -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..500&display=swap" rel="stylesheet">
+  <!-- AOS (Animate on Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { font-family: 'Inter', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #fffaf7;  /* soft cream - light spa tone */
+      scroll-behavior: smooth;
+    }
+    
+    /* ===== LIGHT SPA COLOR PALETTE ===== */
+    :root {
+      --spa-sage: #d4e2d4;        /* soft sage green */
+      --spa-mist: #e8f0ee;        /* misty aqua */
+      --spa-stone: #f5f0eb;       /* warm stone */
+      --spa-clay: #f3ede5;        /* light clay */
+      --spa-teal-soft: #b8d8d8;   /* soft seafoam */
+      --spa-teal: #8fb9b0;        /* muted teal */
+      --spa-teal-dark: #5f8b7f;   /* deeper accent */
+      --spa-ivory: #fffaf5;       /* warm ivory */
+      --spa-linen: #f9f3ef;       /* linen white */
+    }
+    
+    /* Light, airy glass effect */
+    .spa-glass {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 12px 40px -15px rgba(95, 139, 127, 0.08);
+    }
+    
+    .spa-glass-light {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    .spa-card {
+      background-color: white;
+      border-radius: 40px;
+      box-shadow: 0 8px 35px -10px rgba(95, 139, 127, 0.06);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(143, 185, 176, 0.1);
+    }
+    
+    .spa-card:hover {
+      box-shadow: 0 20px 45px -12px rgba(95, 139, 127, 0.12);
+      transform: translateY(-4px);
+      border-color: rgba(143, 185, 176, 0.2);
+    }
+    
+    /* Light gradient backgrounds */
+    .bg-spa-gradient {
+      background: linear-gradient(145deg, #f3f7f5 0%, #faf5f2 100%);
+    }
+    
+    .bg-spa-soft {
+      background-color: #f7f3f0;
+    }
+    
+    /* Typography - light, elegant */
+    .section-title {
+      font-size: 3.2rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #4a6a63;
+    }
+    @media (max-width: 768px) {
+      .section-title { font-size: 2.5rem; }
+    }
+    
+    .hero-full-screen {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    /* Soft image styling */
+    .soft-image {
+      border-radius: 36px;
+      border: 6px solid white;
+      box-shadow: 0 20px 35px -10px rgba(95, 139, 127, 0.1);
+      transition: all 0.5s ease;
+    }
+    
+    .soft-image:hover {
+      transform: scale(1.01);
+      box-shadow: 0 28px 45px -12px rgba(95, 139, 127, 0.15);
+    }
+    
+    /* Custom range slider - light spa theme */
+    .range-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      background: #e0d9d1;
+      border-radius: 20px;
+      outline: none;
+    }
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #8fb9b0;
+      border-radius: 50%;
+      border: 3px solid white;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(95, 139, 127, 0.15);
+      transition: 0.15s;
+    }
+    .range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      background: #5f8b7f;
+    }
+    
+    .pin-beat {
+      animation: pinBeat 1.8s infinite;
+    }
+    @keyframes pinBeat {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+    
+    .full-width {
+      max-width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    
+    /* Floating animation */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Soft blur borders */
+    .blob-bg {
+      background: radial-gradient(circle at 30% 50%, rgba(212, 226, 212, 0.3) 0%, transparent 50%);
+    }
+    
+    /* Spa divider */
+    .spa-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #b8d8d8;
+    }
+    .spa-divider-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #8fb9b0, transparent);
+    }
+  </style>
+</head>
+<body class="antialiased text-[#4a6a63]">
+
+<!-- INIT AOS -->
+<script>AOS.init({ duration: 900, once: true, offset: 120, easing: 'ease-out-cubic' });</script>
+
+<!-- MAIN ONE-PAGE CONTAINER -->
+<div class="w-full full-width">
+
+  <!-- ======= HERO SECTION - LIGHT SPA FORMAT, NEW IMAGE ======= -->
+  <section class="hero-full-screen relative overflow-hidden flex items-center justify-center">
+    <!-- NEW SPA IMAGE - light, airy, serene -->
+    <div class="absolute inset-0 z-0 w-full h-full">
+      <img src="https://images.pexels.com/photos/7450457/pexels-photo-7450457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+           alt="Serene spa with eucalyptus and candles" 
+           class="w-full h-full object-cover object-center">
+      <!-- very light gradient - maintains airy feel -->
+      <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-white/20"></div>
+    </div>
+    
+    <!-- CENTERED CONTENT - LIGHT, AIRY GLASS -->
+    <div class="relative z-20 w-full max-w-6xl mx-auto px-6" data-aos="fade-up" data-aos-duration="1200">
+      <div class="flex flex-col items-center text-center max-w-4xl mx-auto">
+        <!-- Floating lotus - soft -->
+        <div class="float mb-6">
+          <span class="text-7xl md:text-8xl text-white/90 drop-shadow-lg">🪷</span>
+        </div>
+        
+        <!-- Light glass badge -->
+        <span class="bg-white/70 backdrop-blur-md px-8 py-3 rounded-full text-sm md:text-base uppercase tracking-[0.3em] text-[#5f8b7f] font-light border border-white/80 shadow-sm">
+          <i class="fas fa-water mr-2 text-[#8fb9b0]"></i> four fountains · est. 2012
+        </span>
+        
+        <!-- Main headline - soft, elegant -->
+        <h1 class="text-6xl md:text-7xl lg:text-8xl font-light text-white/95 leading-tight mt-10 drop-shadow-md">
+          find your
+          <span class="font-light italic text-white relative">
+            calm
+            <span class="absolute -bottom-3 left-0 w-full h-1 bg-white/60 rounded-full"></span>
+          </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-white/90 mt-8 max-w-2xl font-light tracking-wide">
+          scientifically proven wellness · deeply human touch
+        </p>
+        
+        <!-- Light, airy CTA buttons -->
+        <div class="flex flex-wrap gap-5 justify-center mt-12">
+          <button class="group bg-white/95 text-[#5f8b7f] px-10 py-4 rounded-full text-base md:text-lg font-medium flex items-center gap-3 shadow-lg hover:shadow-xl transition-all duration-500 border border-white/80 backdrop-blur-sm hover:bg-white">
+            <i class="fas fa-calendar-check text-[#8fb9b0] group-hover:scale-110 transition"></i>
+            book your escape
+          </button>
+          <button class="bg-white/70 backdrop-blur-sm text-[#5f8b7f] px-9 py-4 rounded-full text-base md:text-lg font-medium flex items-center gap-3 border border-white/80 hover:bg-white/90 transition-all duration-300 shadow-md">
+            <i class="fas fa-phone-alt text-[#8fb9b0]"></i>
+            +91 80873 03999
+          </button>
+        </div>
+        
+        <!-- Location badges - very light -->
+        <div class="flex flex-wrap gap-4 justify-center mt-12">
+          <div class="bg-white/60 backdrop-blur-sm px-6 py-2.5 rounded-full text-[#5f8b7f] text-sm flex items-center gap-2 border border-white/80 shadow-sm">
+            <i class="fas fa-map-pin text-[#8fb9b0]"></i>
+            PCMC · BANER
+          </div>
+          <div class="bg-white/60 backdrop-blur-sm px-6 py-2.5 rounded-full text-[#5f8b7f] text-sm flex items-center gap-2 border border-white/80 shadow-sm">
+            <i class="far fa-clock text-[#8fb9b0]"></i>
+            9AM – 9PM daily
+          </div>
+          <div class="bg-white/60 backdrop-blur-sm px-6 py-2.5 rounded-full text-[#5f8b7f] text-sm flex items-center gap-2 border border-white/80 shadow-sm">
+            <i class="fas fa-spa text-[#8fb9b0]"></i>
+            open now
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator - light -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30">
+      <div class="bg-white/70 backdrop-blur-sm p-3.5 rounded-full border border-white/80 shadow-md">
+        <i class="fas fa-chevron-down text-[#8fb9b0]"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PHILOSOPHY - LIGHT SPA FORMAT, NEW IMAGES ======= -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-8 py-28 md:py-36">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- LEFT: Spa image gallery - new light spa images -->
+      <div class="relative" data-aos="fade-right">
+        <div class="grid grid-cols-2 gap-5">
+          <div class="space-y-5">
+            <img src="https://images.pexels.com/photos/4210611/pexels-photo-4210611.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                 alt="Spa treatment with flowers" 
+                 class="soft-image h-72 w-full object-cover">
+            <img src="https://images.pexels.com/photos/3779750/pexels-photo-3779750.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                 alt="Wellness therapy" 
+                 class="soft-image h-48 w-full object-cover">
+          </div>
+          <div class="space-y-5 mt-12">
+            <img src="https://images.pexels.com/photos/4038256/pexels-photo-4038256.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                 alt="Massage with stones" 
+                 class="soft-image h-48 w-full object-cover">
+            <img src="https://images.pexels.com/photos/6621362/pexels-photo-6621362.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                 alt="Spa room" 
+                 class="soft-image h-72 w-full object-cover">
+          </div>
+        </div>
+        <!-- decorative soft element -->
+        <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-[#d4e2d4]/30 rounded-full blur-3xl -z-10"></div>
+      </div>
+      
+      <!-- RIGHT: Philosophy content - light spa tones -->
+      <div data-aos="fade-left" class="space-y-8">
+        <span class="text-[#8fb9b0] font-light text-sm uppercase tracking-[0.35em]">the philosophy</span>
+        <h2 class="section-title text-[#4a6a63] leading-tight">
+          your stress‑free body<br>
+          is your <span class="font-light italic border-b-2 border-[#b8d8d8] pb-1">true residence</span>
+        </h2>
+        <p class="text-xl text-[#6b8b84] leading-relaxed font-light">
+          we merge scientifically proven therapies with ancient touch to rebuild you — inside out. 
+          pure family spa, authentic wellness since 2012.
+        </p>
+        <div class="flex flex-wrap gap-8 pt-6">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-[#e8f0ee] rounded-2xl flex items-center justify-center text-[#8fb9b0] text-2xl">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+              <span class="font-medium text-[#4a6a63] text-lg">20+ therapies</span>
+              <p class="text-sm text-[#8c9e98]">swedish, deep tissue, thai</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-[#e8f0ee] rounded-2xl flex items-center justify-center text-[#8fb9b0] text-2xl">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <div>
+              <span class="font-medium text-[#4a6a63] text-lg">ayurvedic wisdom</span>
+              <p class="text-sm text-[#8c9e98]">dosha balance, herbal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= SIGNATURE SERVICES - LIGHT SPA FORMAT, NEW IMAGES ======= -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-8 py-20 bg-[#faf7f4] rounded-[64px] mb-32">
+    <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+      <span class="text-[#8fb9b0] text-sm uppercase tracking-[0.4em] font-light">the flow</span>
+      <h3 class="section-title text-[#4a6a63] mt-4">signature <span class="font-light italic">rituals</span></h3>
+      <div class="spa-divider mt-6">
+        <span class="spa-divider-line"></span>
+        <i class="fas fa-feather text-[#b8d8d8]"></i>
+        <span class="spa-divider-line"></span>
+      </div>
+      <p class="text-lg text-[#8c9e98] mt-6 font-light">ancient wisdom meets modern science · curated for your essence</p>
+    </div>
+    
+    <!-- Service cards - light spa aesthetic -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-7">
+      <!-- card 1 - NEW IMAGE -->
+      <div class="spa-card p-5" data-aos="zoom-in-up">
+        <div class="relative overflow-hidden rounded-[32px] h-64 -m-2 mb-4">
+          <img src="https://images.pexels.com/photos/3997998/pexels-photo-3997998.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Deep tissue massage" 
+               class="w-full h-full object-cover hover:scale-110 transition duration-700">
+          <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm text-[#5f8b7f] shadow-sm border border-white/80">
+            60/90 min
+          </div>
+        </div>
+        <h4 class="text-2xl font-light text-[#4a6a63] mt-3 px-1">swedish · deep tissue</h4>
+        <p class="text-[#8c9e98] px-1 text-base font-light">release chronic tension, rhythmic strokes</p>
+        <div class="flex justify-between items-center mt-5 px-1">
+          <span class="text-[#8fb9b0] font-light flex items-center gap-1">
+            <i class="fas fa-spa"></i> ₹2,499+
+          </span>
+          <span class="w-10 h-10 bg-[#e8f0ee] rounded-full flex items-center justify-center text-[#8fb9b0] hover:bg-[#8fb9b0] hover:text-white transition-all">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+      </div>
+      
+      <!-- card 2 - NEW IMAGE -->
+      <div class="spa-card p-5" data-aos="zoom-in-up" data-aos-delay="100">
+        <div class="relative overflow-hidden rounded-[32px] h-64 -m-2 mb-4">
+          <img src="https://images.pexels.com/photos/5069627/pexels-photo-5069627.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Aromatherapy" 
+               class="w-full h-full object-cover hover:scale-110 transition duration-700">
+          <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm text-[#5f8b7f] shadow-sm border border-white/80">
+            75 min
+          </div>
+        </div>
+        <h4 class="text-2xl font-light text-[#4a6a63] mt-3 px-1">aromatherapy · wraps</h4>
+        <p class="text-[#8c9e98] px-1 text-base font-light">essential oils, body polishes, wraps</p>
+        <div class="flex justify-between items-center mt-5 px-1">
+          <span class="text-[#8fb9b0] font-light flex items-center gap-1">
+            <i class="fas fa-spa"></i> ₹2,999+
+          </span>
+          <span class="w-10 h-10 bg-[#e8f0ee] rounded-full flex items-center justify-center text-[#8fb9b0] hover:bg-[#8fb9b0] hover:text-white transition-all">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+      </div>
+      
+      <!-- card 3 - NEW IMAGE -->
+      <div class="spa-card p-5" data-aos="zoom-in-up" data-aos-delay="150">
+        <div class="relative overflow-hidden rounded-[32px] h-64 -m-2 mb-4">
+          <img src="https://images.pexels.com/photos/3998000/pexels-photo-3998000.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Thai massage" 
+               class="w-full h-full object-cover hover:scale-110 transition duration-700">
+          <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm text-[#5f8b7f] shadow-sm border border-white/80">
+            90 min
+          </div>
+        </div>
+        <h4 class="text-2xl font-light text-[#4a6a63] mt-3 px-1">thai · ayurvedic</h4>
+        <p class="text-[#8c9e98] px-1 text-base font-light">ancient stretching, dosha balance</p>
+        <div class="flex justify-between items-center mt-5 px-1">
+          <span class="text-[#8fb9b0] font-light flex items-center gap-1">
+            <i class="fas fa-spa"></i> ₹3,299+
+          </span>
+          <span class="w-10 h-10 bg-[#e8f0ee] rounded-full flex items-center justify-center text-[#8fb9b0] hover:bg-[#8fb9b0] hover:text-white transition-all">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+      </div>
+      
+      <!-- card 4 - NEW IMAGE -->
+      <div class="spa-card p-5" data-aos="zoom-in-up" data-aos-delay="200">
+        <div class="relative overflow-hidden rounded-[32px] h-64 -m-2 mb-4">
+          <img src="https://images.pexels.com/photos/6621475/pexels-photo-6621475.jpeg?auto=compress&cs=tinysrgb&w=600" 
+               alt="Facial treatment" 
+               class="w-full h-full object-cover hover:scale-110 transition duration-700">
+          <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm text-[#5f8b7f] shadow-sm border border-white/80">
+            45-90 min
+          </div>
+        </div>
+        <h4 class="text-2xl font-light text-[#4a6a63] mt-3 px-1">facials · hair · nails</h4>
+        <p class="text-[#8c9e98] px-1 text-base font-light">revitalizing skin, precise grooming</p>
+        <div class="flex justify-between items-center mt-5 px-1">
+          <span class="text-[#8fb9b0] font-light flex items-center gap-1">
+            <i class="fas fa-spa"></i> ₹1,999+
+          </span>
+          <span class="w-10 h-10 bg-[#e8f0ee] rounded-full flex items-center justify-center text-[#8fb9b0] hover:bg-[#8fb9b0] hover:text-white transition-all">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center mt-16">
+      <span class="inline-flex items-center gap-3 bg-white text-[#5f8b7f] px-9 py-4 rounded-full text-base font-light shadow-md hover:shadow-lg transition-all border border-[#b8d8d8]/30">
+        <i class="fas fa-tag text-[#8fb9b0]"></i> starting ₹1,199 · exclusive member offers
+      </span>
+    </div>
+  </section>
+
+  <!-- ======= LOCATIONS - LIGHT SPA FORMAT, NEW IMAGES ======= -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-8 mb-32">
+    <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+      <span class="text-[#8fb9b0] text-sm uppercase tracking-[0.4em] font-light">your sanctuaries</span>
+      <h2 class="section-title text-[#4a6a63] mt-4">two fountains, <span class="font-light italic">one essence</span></h2>
+      <div class="spa-divider mt-4">
+        <span class="spa-divider-line"></span>
+        <i class="fas fa-feather text-[#b8d8d8]"></i>
+        <span class="spa-divider-line"></span>
+      </div>
+    </div>
+    
+    <!-- PCMC LOCATION - NEW LIGHT SPA IMAGES -->
+    <div class="grid lg:grid-cols-2 gap-12 mb-20 bg-[#faf5f2] rounded-[48px] p-10 lg:p-14" data-aos="fade-up">
+      <div class="space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="bg-white/90 text-[#5f8b7f] px-5 py-2.5 rounded-full text-sm uppercase tracking-wider shadow-sm border border-white"><i class="fas fa-location-dot mr-2 text-[#8fb9b0]"></i> PCMC · PIMPRI</span>
+          <span class="bg-white/80 backdrop-blur px-5 py-2.5 rounded-full text-sm text-[#5f8b7f] border border-white/80"><i class="far fa-clock mr-1"></i> 9AM–9PM</span>
+        </div>
+        <h3 class="text-3xl md:text-4xl font-light text-[#4a6a63]">four fountains<br><span class="font-light italic">de‑stress spa</span></h3>
+        <p class="text-lg text-[#8c9e98] leading-relaxed font-light">2nd floor chambers, above tanishq, next to keys hotel, near pcmc office, old mumbai pune hwy, pimpri colony – 411018</p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <span class="bg-white px-7 py-3.5 rounded-full text-[#5f8b7f] font-light shadow-md flex items-center gap-2 border border-white/80">
+            <i class="fas fa-phone-alt text-[#8fb9b0]"></i> +91 80873 03999
+          </span>
+          <span class="bg-white/70 backdrop-blur px-7 py-3.5 rounded-full text-[#8c9e98] flex items-center gap-2">
+            <i class="fas fa-circle pin-beat text-xs text-[#8fb9b0]"></i> open today
+          </span>
+        </div>
+      </div>
+      <!-- NEW SPA IMAGES GRID - light, airy spa interiors -->
+      <div class="grid grid-cols-2 gap-4">
+        <img src="https://images.pexels.com/photos/4038256/pexels-photo-4038256.jpeg?auto=compress&cs=tinysrgb&w=600" class="rounded-[32px] object-cover h-48 w-full shadow-lg border-4 border-white/80 hover-lift" alt="spa interior">
+        <img src="https://images.pexels.com/photos/3779750/pexels-photo-3779750.jpeg?auto=compress&cs=tinysrgb&w=600" class="rounded-[32px] object-cover h-48 w-full shadow-lg border-4 border-white/80 hover-lift" alt="spa room">
+        <img src="https://images.pexels.com/photos/4210611/pexels-photo-4210611.jpeg?auto=compress&cs=tinysrgb&w=600" class="rounded-[32px] object-cover h-48 w-full shadow-lg border-4 border-white/80 hover-lift col-span-2" alt="spa treatment">
+      </div>
+    </div>
+    
+    <!-- BANER LOCATION - NEW LIGHT SPA IMAGES -->
+    <div class="grid lg:grid-cols-2 gap-12 bg-[#faf5f2] rounded-[48px] p-10 lg:p-14" data-aos="fade-up">
+      <div class="space-y-6 lg:order-2">
+        <div class="flex items-center gap-3">
+          <span class="bg-white/90 text-[#5f8b7f] px-5 py-2.5 rounded-full text-sm uppercase tracking-wider shadow-sm border border-white"><i class="fas fa-location-dot mr-2 text-[#8fb9b0]"></i> BANER · BALEWADI</span>
+          <span class="bg-white/80 backdrop-blur px-5 py-2.5 rounded-full text-sm text-[#5f8b7f] border border-white/80"><i class="far fa-clock mr-1"></i> 9AM–9PM</span>
+        </div>
+        <h3 class="text-3xl md:text-4xl font-light text-[#4a6a63]">four fountains<br><span class="font-light italic">de‑stress spa</span></h3>
+        <p class="text-lg text-[#8c9e98] leading-relaxed font-light">swastashree, baner mahalunge road, near joshi wade wale, baner, pune – 411045</p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <span class="bg-white px-7 py-3.5 rounded-full text-[#5f8b7f] font-light shadow-md flex items-center gap-2 border border-white/80">
+            <i class="fas fa-phone-alt text-[#8fb9b0]"></i> +91 88051 13399
+          </span>
+          <span class="bg-white/70 backdrop-blur px-7 py-3.5 rounded-full text-[#8c9e98] flex items-center gap-2">
+            <i class="fas fa-circle pin-beat text-xs text-[#8fb9b0]"></i> direct booking
+          </span>
+        </div>
+      </div>
+      <!-- NEW SPA IMAGES GRID -->
+      <div class="grid grid-cols-2 gap-4 lg:order-1">
+        <img src="https://images.pexels.com/photos/3998002/pexels-photo-3998002.jpeg?auto=compress&cs=tinysrgb&w=600" class="rounded-[32px] object-cover h-48 w-full shadow-lg border-4 border-white/80 hover-lift" alt="spa baner">
+        <img src="https://images.pexels.com/photos/6620970/pexels-photo-6620970.jpeg?auto=compress&cs=tinysrgb&w=600" class="rounded-[32px] object-cover h-48 w-full shadow-lg border-4 border-white/80 hover-lift" alt="wellness">
+        <img src="https://images.pexels.com/photos/7450457/pexels-photo-7450457.jpeg?auto=compress&cs=tinysrgb&w=600" class="rounded-[32px] object-cover h-48 w-full shadow-lg border-4 border-white/80 hover-lift col-span-2" alt="spa candles">
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= GUEST EXPERIENCE - LIGHT SPA FORMAT ======= -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-8 mb-32">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div data-aos="fade-right">
+        <span class="text-[#8fb9b0] text-sm uppercase tracking-[0.4em] font-light">we listen</span>
+        <h2 class="section-title text-[#4a6a63] mt-4 mb-6">real voices,<br><span class="font-light italic">real evolution</span></h2>
+        <p class="text-xl text-[#8c9e98] leading-relaxed font-light">every word shapes us — we embrace feedback and transform it into deeper relaxation.</p>
+        <div class="mt-10 flex gap-4 items-center">
+          <div class="flex -space-x-3">
+            <img src="https://images.pexels.com/photos/3997995/pexels-photo-3997995.jpeg?auto=compress&cs=tinysrgb&w=200" class="w-14 h-14 rounded-full border-4 border-white shadow-md" alt="guest">
+            <img src="https://images.pexels.com/photos/6620970/pexels-photo-6620970.jpeg?auto=compress&cs=tinysrgb&w=200" class="w-14 h-14 rounded-full border-4 border-white shadow-md" alt="guest">
+          </div>
+          <span class="text-[#5f8b7f] font-light">4.8 ★ (2.3k+ reviews)</span>
+        </div>
+      </div>
+      
+      <div class="space-y-6" data-aos="fade-left">
+        <!-- positive review -->
+        <div class="bg-white p-8 rounded-[40px] shadow-md border border-[#b8d8d8]/20 hover-lift">
+          <div class="flex gap-1 text-[#8fb9b0] text-xl mb-4">★★★★★</div>
+          <p class="text-xl italic text-[#6b8b84] font-light">“tranquil and calming atmosphere, complete with soft lighting and serene environment. pure escape.”</p>
+          <div class="flex items-center gap-3 mt-6">
+            <div class="w-12 h-12 bg-[#e8f0ee] rounded-full flex items-center justify-center text-[#8fb9b0]">👤</div>
+            <span class="font-light text-[#4a6a63]">— guest, pcmc</span>
+          </div>
+        </div>
+        
+        <!-- constructive + response -->
+        <div class="bg-white p-8 rounded-[40px] shadow-md border border-[#b8d8d8]/20 hover-lift">
+          <div class="flex gap-1 text-[#c3a876] text-xl mb-4">★★★☆☆</div>
+          <p class="text-xl italic text-[#6b8b84] font-light">“rooms are a bit dark, and feels pricey compared to the value.”</p>
+          <div class="mt-6 bg-[#f5f0eb] p-6 rounded-3xl">
+            <span class="font-light text-[#4a6a63] flex items-center gap-3 text-lg">
+              <i class="fas fa-arrows-spin text-[#8fb9b0]"></i> we are redesigning our light spaces for deeper relaxation.
+            </span>
+            <span class="block text-base text-[#8c9e98] mt-2">— four fountains team, committed to better.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= MOOD MATCHER – LIGHT SPA FORMAT ======= -->
+  <section class="max-w-7xl mx-auto px-6 lg:px-8 mb-32">
+    <div class="bg-[#f5f0eb] rounded-[64px] p-12 lg:p-20 shadow-sm border border-[#b8d8d8]/30" data-aos="zoom-in">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center text-[#4a6a63]">
+          <span class="bg-white/80 backdrop-blur text-[#5f8b7f] px-8 py-3 rounded-full text-sm uppercase tracking-widest border border-[#b8d8d8]/40 inline-flex items-center gap-2 shadow-sm">
+            <i class="fas fa-sliders-h text-[#8fb9b0]"></i> high‑level interactive
+          </span>
+          <h3 class="text-4xl md:text-5xl lg:text-6xl font-light text-[#4a6a63] mt-10 mb-3">mood matcher</h3>
+          <p class="text-[#8c9e98] text-xl mb-16 font-light">slide to reveal your perfect therapy</p>
+        </div>
+        
+        <!-- sliders - light spa theme -->
+        <div class="mb-12" data-aos="fade-right">
+          <div class="flex justify-between items-center text-[#4a6a63]">
+            <label class="font-light flex items-center gap-2 text-lg"><i class="fas fa-bolt text-[#8fb9b0]"></i> energy level</label>
+            <span class="text-sm bg-white/80 backdrop-blur px-5 py-2.5 rounded-full text-[#5f8b7f] border border-[#b8d8d8]/40" id="energyLabel">exhausted</span>
+          </div>
+          <input type="range" min="0" max="100" value="30" class="range-slider w-full mt-4" id="energySlider">
+          <div class="flex justify-between text-sm text-[#8c9e98] px-1 mt-2"><span>exhausted</span><span>balanced</span><span>restless</span></div>
+        </div>
+        
+        <div class="mb-16" data-aos="fade-left">
+          <div class="flex justify-between items-center text-[#4a6a63]">
+            <label class="font-light flex items-center gap-2 text-lg"><i class="fas fa-spa text-[#8fb9b0]"></i> seek</label>
+            <span class="text-sm bg-white/80 backdrop-blur px-5 py-2.5 rounded-full text-[#5f8b7f] border border-[#b8d8d8]/40" id="seekLabel">relief</span>
+          </div>
+          <input type="range" min="0" max="100" value="70" class="range-slider w-full mt-4" id="seekSlider">
+          <div class="flex justify-between text-sm text-[#8c9e98] px-1 mt-2"><span>relief</span><span>balance</span><span>glow</span></div>
+        </div>
+        
+        <!-- result card - light spa glass -->
+        <div id="morphResult" class="bg-white/80 backdrop-blur-sm p-12 rounded-[48px] shadow-lg border border-white/80 transition-all duration-300">
+          <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="text-7xl bg-[#e8f0ee] p-6 rounded-[40px] border border-[#b8d8d8]/30">💧🧘</div>
+            <div class="text-center md:text-left">
+              <h4 id="therapyName" class="text-3xl md:text-4xl font-light text-[#4a6a63]">deep tissue + aromatherapy</h4>
+              <p id="therapyDesc" class="text-[#8c9e98] mt-3 text-xl font-light">exhaustion + relief · deep muscle release & calming lavender</p>
+            </div>
+          </div>
+        </div>
+        <p class="text-center text-[#8c9e98] text-sm mt-10"><i class="far fa-clock mr-2"></i> instant recommendation · four fountains wisdom</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER - LIGHT SPA FORMAT ======= -->
+  <footer class="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-16 border-t border-[#d4dfdc]/40">
+    <div class="grid md:grid-cols-4 gap-12">
+      <div class="col-span-1 md:col-span-1">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-4xl text-[#8fb9b0]">🪷</span>
+          <h4 class="text-3xl font-light text-[#4a6a63]">four fountains</h4>
+        </div>
+        <p class="text-base text-[#8c9e98] leading-relaxed font-light">bringing scientifically proven health benefits of spa. family owned since 2012, rooted in pune.</p>
+        <div class="flex gap-5 mt-7 text-2xl text-[#8fb9b0]">
+          <i class="fab fa-instagram hover:scale-110 transition hover:text-[#5f8b7f]"></i>
+          <i class="fab fa-facebook hover:scale-110 transition hover:text-[#5f8b7f]"></i>
+          <i class="fab fa-whatsapp hover:scale-110 transition hover:text-[#5f8b7f]"></i>
+        </div>
+      </div>
+      
+      <div>
+        <span class="text-sm uppercase tracking-wider text-[#8fb9b0] font-light text-lg">hours</span>
+        <p class="mt-6 text-[#4a6a63] text-lg font-light"><i class="far fa-calendar-alt mr-3 text-[#8fb9b0]"></i> 9:00 am – 9:00 pm</p>
+        <p class="text-base text-[#8c9e98] mt-2 font-light">open daily, including sundays</p>
+      </div>
+      
+      <div>
+        <span class="text-sm uppercase tracking-wider text-[#8fb9b0] font-light text-lg">locations</span>
+        <p class="mt-6 text-base"><span class="font-light text-[#4a6a63]">pcmc:</span> <span class="text-[#8c9e98]">411018</span></p>
+        <p class="mt-3 text-base"><span class="font-light text-[#4a6a63]">baner:</span> <span class="text-[#8c9e98]">411045</span></p>
+        <p class="mt-6 text-sm text-[#8fb9b0] font-light"><i class="fas fa-arrow-right mr-2"></i> both accessible</p>
+      </div>
+      
+      <div>
+        <span class="text-sm uppercase tracking-wider text-[#8fb9b0] font-light text-lg">connect</span>
+        <p class="mt-6 text-base text-[#8c9e98] font-light">IG / FB @fourfountains.spa</p>
+        <p class="mt-4 text-base text-[#8c9e98] font-light">care@fourfountains.com</p>
+        <p class="mt-6 text-sm text-[#8fb9b0] font-light">📞 pcmc: +91 80873 03999</p>
+        <p class="mt-2 text-sm text-[#8fb9b0] font-light">📞 baner: +91 88051 13399</p>
+      </div>
+    </div>
+    
+    <div class="text-center text-sm text-[#8c9e98] mt-20 pt-8 border-t border-[#d4dfdc]/30 font-light">
+      <span>© 2026 four fountains de‑stress spa — pure wellness, rooted in pune.</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ======= MOOD MATCHER SCRIPT ======= -->
+<script>
+  (function() {
+    const energySlider = document.getElementById('energySlider');
+    const seekSlider = document.getElementById('seekSlider');
+    const energyLabel = document.getElementById('energyLabel');
+    const seekLabel = document.getElementById('seekLabel');
+    const therapyName = document.getElementById('therapyName');
+    const therapyDesc = document.getElementById('therapyDesc');
+
+    function updateMood() {
+      let e = parseInt(energySlider.value);
+      let s = parseInt(seekSlider.value);
+
+      if (e < 33) energyLabel.innerText = 'exhausted';
+      else if (e < 66) energyLabel.innerText = 'balanced';
+      else energyLabel.innerText = 'restless';
+
+      if (s < 33) seekLabel.innerText = 'relief';
+      else if (s < 66) seekLabel.innerText = 'balance';
+      else seekLabel.innerText = 'glow';
+
+      if (e < 40 && s < 40) { 
+        therapyName.innerText = 'swedish · deep unwinding'; 
+        therapyDesc.innerText = 'exhausted + relief → gentle compressions, improve circulation.';
+      } else if (e < 40 && s >= 40 && s < 70) { 
+        therapyName.innerText = 'aromatherapy & hot stone'; 
+        therapyDesc.innerText = 'low energy + balance → grounding vetiver, warm basalt.'; 
+      } else if (e < 40 && s >= 70) { 
+        therapyName.innerText = 'rejuvenating facial + wrap'; 
+        therapyDesc.innerText = 'exhausted + glow → hydrate, brighten, renew skin.'; 
+      } else if (e >= 40 && e < 70 && s < 40) { 
+        therapyName.innerText = 'deep tissue / thai stretch'; 
+        therapyDesc.innerText = 'balanced but tight → release fascia, increase mobility.'; 
+      } else if (e >= 70 && s < 40) { 
+        therapyName.innerText = 'neck & back relief'; 
+        therapyDesc.innerText = 'restless + relief → tension melt, calming scalp massage.'; 
+      } else if (e >= 70 && s >= 70) { 
+        therapyName.innerText = 'citrus glow body polish'; 
+        therapyDesc.innerText = 'restless energy + glow → invigorating scrub, radiance.'; 
+      } else { 
+        therapyName.innerText = 'signature four fountains'; 
+        therapyDesc.innerText = 'custom blend of deep tissue + aromatherapy.'; 
+      }
+    }
+
+    energySlider.addEventListener('input', updateMood);
+    seekSlider.addEventListener('input', updateMood);
+    updateMood();
+  })();
+</script>
+
+<!-- AOS refresh -->
+<script>AOS.refresh();</script>
+</body>
+</html>
